@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(StepSequencerApp());
-}
+
 
 class StepSequencerApp extends StatelessWidget {
   @override
@@ -27,29 +25,9 @@ class StepSequencerGrid extends StatefulWidget {
 class _StepSequencerGridState extends State<StepSequencerGrid> {
   int numBeats = 16;
   int numTracks = 4;
-  List<List<int>> sequence;
+  List<List<int>> sequence = List.generate(4, (_) => List.filled(16, 0));
 
   bool isPlaying = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Beim Start der App werden die Sequenzdaten aus der Mock-Datenbank geladen
-    sequence = loadSequenceFromDatabase() ?? List.generate(4, (_) => List.filled(16, 0));
-  }
-
-  // Mock-Datenbank-Funktionen
-  List<List<int>> loadSequenceFromDatabase() {
-    // Hier würden die Daten aus der echten Datenbank geladen werden
-    // Für das Mockup geben wir hier einfach null zurück, um zu simulieren, dass keine Daten vorhanden sind
-    return null;
-  }
-
-  void saveSequenceToDatabase(List<List<int>> sequence) {
-    // Hier würden die Daten in die echte Datenbank gespeichert werden
-    // Für das Mockup geben wir hier nur die Daten auf der Konsole aus
-    print('Sequence saved to database: $sequence');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +76,6 @@ class _StepSequencerGridState extends State<StepSequencerGrid> {
             SizedBox(width: 20),
             RaisedButton(
               onPressed: () {
-                saveSequenceToDatabase(sequence);
                 // Hier kann die Stopp-Logik eingefügt werden
               },
               child: Text('Stop'),
